@@ -42,6 +42,7 @@ static bool newFramebuffer(int width, int height)
 
 static void *playerGameLoop(void *arg)
 {
+    (void)arg;
     while (true)
     {
         pthread_mutex_lock(&mutex);
@@ -66,6 +67,7 @@ static void *playerGameLoop(void *arg)
 
 static void *AIGameLoop(void *arg)
 {
+    (void)arg;
     while (true)
     {
         pthread_mutex_lock(&mutex);
