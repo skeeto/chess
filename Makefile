@@ -1,7 +1,8 @@
 .POSIX:
 .SUFFIXES: .c .bmp .ttf
 CC      = cc
-CC_EXE  = x86_64-w64-mingw32-gcc
+HOST_CC = cc
+EXE_CC  = x86_64-w64-mingw32-gcc
 CFLAGS  = -Wall -Wextra -Wno-unused-function -O3
 LDFLAGS = -s
 LDLIBS  =
@@ -26,13 +27,30 @@ chess: $(linux) $(embed)
 	$(CC) -pthread $(CFLAGS) $(LDFLAG) -o $@ $(linux) -lm -lX11 $(LDLIBS)
 
 chess.exe: $(win32) $(embed)
-	$(CC_EXE) -mwindows $(CFLAGS) $(LDFLAG) -o $@ $(win32) $(LDLIBS)
+	$(EXE_CC) -mwindows $(CFLAGS) $(LDFLAG) -o $@ $(win32) $(LDLIBS)
 
-.bmp.c:
-	xxd -i <$< >$@
-
-.ttf.c:
-	xxd -i <$< >$@
+embed$(EXE): src/embed.c
+	$(HOST_CC) -o $@ src/embed.c
 
 clean:
-	rm -f chess chess.exe $(embed)
+	rm -f chess chess.exe embed$(EXE) $(embed)
+
+.bmp.c:
+	./embed <$< >$@
+
+.ttf.c:
+	./embed <$< >$@
+
+assets/images/black-bishop.c: embed$(EXE)
+assets/images/black-king.c: embed$(EXE)
+assets/images/black-knight.c: embed$(EXE)
+assets/images/black-pawn.c: embed$(EXE)
+assets/images/black-queen.c: embed$(EXE)
+assets/images/black-rook.c: embed$(EXE)
+assets/images/white-bishop.c: embed$(EXE)
+assets/images/white-king.c: embed$(EXE)
+assets/images/white-knight.c: embed$(EXE)
+assets/images/white-pawn.c: embed$(EXE)
+assets/images/white-queen.c: embed$(EXE)
+assets/images/white-rook.c: embed$(EXE)
+assets/fonts/LiberationSans-Regular.c: embed$(EXE)

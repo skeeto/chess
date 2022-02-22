@@ -18,7 +18,7 @@ Linux/BSD:
 
 Windows (native or cross-compiled):
 
-	make EXE=.exe
+	make chess.exe
 
 MSVC:
 
