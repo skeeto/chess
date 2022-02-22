@@ -102,7 +102,7 @@ static uint8_t handleNextEvent(int *newWidth, int *newHeight, bool playerGame)
     {
         case ClientMessage:
         {
-            if (event.xclient.data.l[0] == wm_delete)
+            if (event.xclient.data.l[0] == (long)wm_delete)
             {
                 return QUIT;
             }
