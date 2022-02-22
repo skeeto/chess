@@ -1,0 +1,11 @@
+CC      = cl /nologo
+CFLAGS  = /Ox
+
+src = src/assets.c src/events.c src/fonts.c src/game.c src/pcgrandom.c \
+      src/platform.c src/renderer.c src/windows_common.c src/windows_main.c
+
+chess.exe: $(src)
+	$(CC) $(CFLAGS) /Fe:$@ $(src) gdi32.lib user32.lib advapi32.lib
+
+clean:
+	del /f chess.exe *.obj
