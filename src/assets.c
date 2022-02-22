@@ -8,12 +8,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+static uint32_t loadu32(const uint8_t *p)
+{
+    return (uint32_t)p[0] <<  0 | (uint32_t)p[1] <<  8 |
+           (uint32_t)p[2] << 16 | (uint32_t)p[3] << 24;
+}
+
 static void loadBmp(const uint8_t *bmpData, Image *image)
 {
-    uint32_t startingPixelIndex = *(uint32_t *)&bmpData[10];
-    int32_t width = *(int32_t *)&bmpData[18];
-    int32_t height = *(int32_t *)&bmpData[22];
-    uint32_t pixelDataSize = *(uint32_t *)&bmpData[34];
+    uint32_t startingPixelIndex = loadu32(&bmpData[10]);
+    int32_t width = loadu32(&bmpData[18]);
+    int32_t height = loadu32(&bmpData[22]);
+    uint32_t pixelDataSize = loadu32(&bmpData[34]);
     uint32_t expectedDataSize = width * height * 4;
     if (expectedDataSize != pixelDataSize)
     {
