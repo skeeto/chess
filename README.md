@@ -24,18 +24,6 @@ MSVC:
 
 	nmake /f NMakefile
 
-Lastly, the game will look for an "assets" folder in the build directory.
-You will need to either make a symlink or copy-paste it into the build
-directory. For a symlink:
-
-Linux/BSD:
-
-	ln -s ../assets assets
-
-Windows:
-
-	mklink /D assets ..\assets
-
 ## Command-line arguments
 
 * `-test` or `-test -verbose`: Calculates number of positions from some

@@ -11,11 +11,9 @@
 void loadFont(void)
 {
     stbtt_fontinfo fontInfo;
-    void *fontFile = loadFile("assets/fonts/LiberationSans-Regular.ttf");
-    if (fontFile == NULL)
-    {
-        return;
-    }
+	static const uint8_t fontFile[] = {
+		#include "../assets/fonts/LiberationSans-Regular.c"
+	};
     if (stbtt_InitFont(&fontInfo, fontFile, 0) == 0)
     {
         debugLog("stb_truetype failed to initilize");
@@ -43,5 +41,4 @@ void loadFont(void)
             glyphs[i].kerning[j] = stbtt_GetGlyphKernAdvance(&fontInfo, glyphIndices[i], glyphIndices[j]) * scale;
         }
     }
-    free(fontFile);
 }

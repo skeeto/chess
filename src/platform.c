@@ -15,15 +15,6 @@ void blitToScreen(void)
 #endif
 }
 
-void *loadFile(const char *fileName)
-{
-#ifdef _WIN32
-	return windowsLoadFile(fileName);
-#else
-	return linuxLoadFile(fileName);
-#endif
-}
-
 void debugLog(const char *message)
 {
 #ifdef _WIN32
