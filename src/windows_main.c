@@ -58,8 +58,8 @@ LRESULT CALLBACK WindowsCallback(_In_ HWND hwnd, _In_ UINT Msg, _In_ WPARAM wPar
 		}
 		case WM_SIZE:
 		{
-			UINT width = LOWORD(lParam);
-			UINT height = HIWORD(lParam);
+			int width = LOWORD(lParam);
+			int height = HIWORD(lParam);
 			if (width < 1 || height < 1)
 			{
 				return 0;
