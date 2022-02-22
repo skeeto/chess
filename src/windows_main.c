@@ -32,7 +32,9 @@ static bool newFramebuffer(int width, int height)
 	bitmapInfo.bmiHeader.biYPelsPerMeter = 0;
 	bitmapInfo.bmiHeader.biClrUsed = 0;
 	bitmapInfo.bmiHeader.biClrImportant = 0;
-	framebufferDIB = CreateDIBSection(frameBufferDC, &bitmapInfo, DIB_RGB_COLORS, &framebuffer.data, NULL, 0);
+	void *data;
+	framebufferDIB = CreateDIBSection(frameBufferDC, &bitmapInfo, DIB_RGB_COLORS, &data, NULL, 0);
+	framebuffer.data = data;
 	if (framebufferDIB == NULL)
 	{
 		OutputDebugStringA("CreateDIBSection Failed\r\n");
