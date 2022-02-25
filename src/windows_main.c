@@ -190,7 +190,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	windowClass.cbClsExtra = 0;
 	windowClass.cbWndExtra = 0;
 	windowClass.hInstance = hInstance;
-	windowClass.hIcon = NULL;
+	windowClass.hIcon = LoadIcon(GetModuleHandle(0), MAKEINTRESOURCE(1));
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	windowClass.hbrBackground = NULL;
 	windowClass.lpszMenuName = NULL;

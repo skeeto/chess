@@ -2,7 +2,9 @@
 .SUFFIXES: .c .bmp .ttf
 CC      = cc
 HOST_CC = cc
-EXE_CC  = x86_64-w64-mingw32-gcc
+EXE_CC  = $(CROSS)gcc
+WINDRES = $(CROSS)windres
+CROSS   = x86_64-w64-mingw32-
 CFLAGS  = -Wall -Wextra -Wno-unused-function -O3
 LDFLAGS = -s
 LDLIBS  =
@@ -26,14 +28,17 @@ all: chess chess.exe
 chess: $(linux) $(embed)
 	$(CC) -pthread $(CFLAGS) $(LDFLAG) -o $@ $(linux) -lm -lX11 $(LDLIBS)
 
-chess.exe: $(win32) $(embed)
-	$(EXE_CC) -mwindows $(CFLAGS) $(LDFLAG) -o $@ $(win32) $(LDLIBS)
+chess.exe: $(win32) $(embed) icon.o
+	$(EXE_CC) -mwindows $(CFLAGS) $(LDFLAG) -o $@ $(win32) icon.o $(LDLIBS)
+
+icon.o: assets/chess.ico
+	echo '1 ICON "assets/chess.ico"' | $(WINDRES) -o $@
 
 embed$(EXE): src/embed.c
 	$(HOST_CC) -o $@ src/embed.c
 
 clean:
-	rm -f chess chess.exe embed$(EXE) $(embed)
+	rm -f chess chess.exe embed$(EXE) icon.o $(embed)
 
 .bmp.c:
 	./embed <$< >$@
