@@ -9,5 +9,6 @@ int main(void)
     for (int i = 0, c = getchar(); c != EOF; i++, c = getchar()) {
         printf("0x%02x,%c", c, i%12 == 11 ? '\n' : ' ');
     }
+    fflush(stdout);
     return ferror(stdin) || ferror(stdout);
 }
