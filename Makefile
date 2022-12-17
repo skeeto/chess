@@ -1,11 +1,11 @@
 .POSIX:
-.SUFFIXES: .c .bmp .ttf
+.SUFFIXES: .c .qoi .ttf
 CC      = cc
 HOST_CC = cc
 EXE_CC  = $(CROSS)gcc
 WINDRES = $(CROSS)windres
 CROSS   = x86_64-w64-mingw32-
-CFLAGS  = -Wall -Wextra -Wno-unused-function -O3
+CFLAGS  = -Wall -Wextra -Wno-unused-function -O3 -DNDEBUG
 LDFLAGS = -s
 LDLIBS  =
 
@@ -40,7 +40,7 @@ embed$(EXE): src/embed.c
 clean:
 	rm -f chess chess.exe embed$(EXE) icon.o $(embed)
 
-.bmp.c:
+.qoi.c:
 	./embed <$< >$@
 
 .ttf.c:

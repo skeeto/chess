@@ -1,4 +1,4 @@
-.SUFFIXES: .c .bmp. .ttf
+.SUFFIXES: .c .qoi. .ttf
 CC      = cl /nologo
 RC      = rc /nologo
 CFLAGS  = /Ox
@@ -25,7 +25,7 @@ icon.rc:
 clean:
 	del /f chess.exe embed.exe icon.res icon.rc $(embed) *.obj
 
-.bmp.c:
+.qoi.c:
 	embed <$< >$@
 
 .ttf.c:
