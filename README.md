@@ -16,13 +16,13 @@ Linux/BSD:
 
 	make
 
-Windows (native or cross-compiled):
+Mingw-w64 (native or cross-compiled):
 
 	make chess.exe
 
 MSVC:
 
-	nmake /f NMakefile
+	nmake
 
 ## Command-line arguments
 
